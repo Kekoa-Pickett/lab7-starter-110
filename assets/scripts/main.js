@@ -24,7 +24,7 @@ function getRecipesFromStorage() {
 	// A9. TODO - Complete the functionality as described in this function
 	//           header. It is possible in only a single line, but should
 	//           be no more than a few lines.
-	return JSON.parse(localStorage.getItem('recipes') || []);
+	return JSON.parse(localStorage.getItem('recipes')) || [];
 }
 
 /**
@@ -70,8 +70,8 @@ function initFormHandler() {
 	let formEl = document.querySelector('form');
 	// B3. TODO - Add an event listener for the 'submit' event, which fires when the
 	//    submit button is clicked
-	let submitButton = document.querySelector('button');
-	submitButton.addEventListener('click', () => {
+	formEl.addEventListener('submit', function(event) {
+		event.preventDefault();
 	// Steps B4-B9 will occur inside the event listener from step B3
 	// B4. TODO - Create a new FormData object from the <form> element reference above
 		let formData = new FormData(formEl);
@@ -96,24 +96,27 @@ function initFormHandler() {
 		recipeCard.data = recipeObject;
 	// B8. TODO - Append this new <recipe-card> to <main>
 		let mainEl = document.querySelector('main');
-		mainEl.append(recipeCard);
+		mainEl.appendChild(recipeCard);
 	// B9. TODO - Get the recipes array from localStorage, add this new recipe to it, and
 	//            then save the recipes array back to localStorage
 		let recipeList = getRecipesFromStorage();
 		//recipeList.addRecipesToDocument(recipeCard);
-		recipeList.push(recipeCard);
-		saveRecipesToStorage(recipeList);
+		recipeList.push(recipeObject);
+		localStorage.setItem('recipes',JSON.stringify(recipeList));
 	});
 	// B10. TODO - Get a reference to the "Clear Local Storage" button
 	let clrStr = formEl.querySelector('.danger');
 	// B11. TODO - Add a click event listener to clear local storage button
-	clrStr.addEventListener('click', () => {
-
+	clrStr.addEventListener('click', function() {
 	// Steps B12 & B13 will occur inside the event listener from step B11
 	// B12. TODO - Clear the local storage
 		localStorage.clear();
 	// B13. TODO - Delete the contents of <main>
 		let mainEl = document.querySelector('main');
-		mainEl.clear();
+		//mainEl.removeChild;
+		while (mainEl.hasChildNodes()){
+			mainEl.removeChild(mainEl.firstChild);
+		}
+
 	});
 }

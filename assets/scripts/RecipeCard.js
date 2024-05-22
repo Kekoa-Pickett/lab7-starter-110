@@ -91,7 +91,7 @@ class RecipeCard extends HTMLElement {
 				color: #70757A;
 				font-size: 12px;
 			}
-		`
+		`;
 		// A5. Append the <style> and <article> elements to the Shadow DOM
 		shadowEl.append(styleEl);
 		shadowEl.append(articleEl);
@@ -132,9 +132,8 @@ class RecipeCard extends HTMLElement {
 		// 			 Do NOT include the <article> tags within the innerHTML of the element you create.
 		//           Remember to replace all the placeholders in the template with the data passed in.
 		//           i.e. imgSrc, titleLnk, etc
-		articleEl.innerHTML = `
-			<img src=${data.imgSrc}
-			alt=${data.imgAlt}>
+		articleEl.innerHTML = 
+			`<img src=${data.imgSrc} alt=${data.imgAlt}>
 		<p class="title">
 			<a href=${data.titleLnk}>${data.titleTxt}</a>
 		</p>
@@ -148,7 +147,7 @@ class RecipeCard extends HTMLElement {
 		<p class="ingredients">
 			${data.ingredients}
 		</p>
-		`
+		`;
 	}
 }
 
